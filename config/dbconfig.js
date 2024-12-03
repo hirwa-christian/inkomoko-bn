@@ -1,7 +1,8 @@
-module.exports={
-    HOST:"localhost",
-    USER:"root",
-    PASSWORD:"",
-    DB:"trader",
-    dialect:"mysql"
-}
+module.exports = {
+    HOST: process.env.DB_HOST,
+    PORT: process.env.PORT, // Add the PORT variable
+    USER: process.env.DB_USER,
+    PASSWORD: process.env.DB_PASSWORD,
+    DB: process.env.DB_NAME,
+    dialect: process.env.DIALECT
+};
