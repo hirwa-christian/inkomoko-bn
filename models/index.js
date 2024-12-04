@@ -1,11 +1,11 @@
-const dbConfig=require('../config/dbconfig.js');
-console.log(dbConfig)
+// const dbConfig=require('../config/dbconfig.js');
+// console.log(dbConfig)
 const {Sequelize,DataTypes}=require('sequelize')
 
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
-    port: dbConfig.PORT, // Use the port from the config
-    dialect: dbConfig.dialect,
+const sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER,process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    port: process.env.PORT, // Use the port from the config
+    dialect: process.env.DIALECT,
     logging: false, // Optional: Disable logging for cleaner output
     pool: {
         max: 5, // Maximum number of connections
