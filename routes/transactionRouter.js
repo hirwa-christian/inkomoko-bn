@@ -1,7 +1,8 @@
-const transactionController=require('../controllers/transactionController.js')
-const userController=require('../controllers/userController.js')
 
-const router=require('express').Router()
+import transactionController from "../controllers/transactionController.js"
+import userController from "../controllers/userController.js"
+import express from "express"
+const router = express.Router();
 router.post('/addTransaction',transactionController.addTransaction)
 
 //get all transaction
@@ -22,5 +23,5 @@ router.post('/Userlogin',userController.Userlogin)
 
 router.post('/logoutuser',userController.logoutUser)
 
-module.exports=router
+export default router
 

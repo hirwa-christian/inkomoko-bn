@@ -1,6 +1,7 @@
-const { where } = require('sequelize');
-const db=require('../models')
-const Joi = require('joi');
+
+import { where } from 'sequelize';
+import db from "../models/index.js"
+import Joi from 'joi';
 
 //create main Model 
 
@@ -68,7 +69,7 @@ const deleteTransaction=async(req,res)=>{
 
 //6.search
 
-module.exports={
+export default {
     addTransaction,
     getAlltransactions,
     Updatetransaction,

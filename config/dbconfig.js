@@ -1,8 +1,10 @@
-module.exports = {
-    HOST: process.env.DB_HOST,
-    PORT: process.env.DB_PORT, // Add the PORT variable
-    USER: process.env.DB_USER,
-    PASSWORD: process.env.DB_PASSWORD,
-    DB: process.env.DB_NAME,
-    dialect: process.env.DIALECT
+
+const dbconfig = {
+    HOST: 'localhost',           
+    USER: 'root',    
+    PASSWORD: '',
+    DB: 'inkomoko',  
+    dialect: 'mysql' 
 };
+
+export default dbconfig

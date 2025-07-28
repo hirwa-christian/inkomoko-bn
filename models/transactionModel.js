@@ -1,4 +1,4 @@
-module.exports=(sequelize,DataTypes)=>{
+const transactionModel=(sequelize,DataTypes)=>{
     const Transaction=sequelize.define("transaction",{
         items:{
             type:DataTypes.STRING,
@@ -19,3 +19,4 @@ module.exports=(sequelize,DataTypes)=>{
     })
     return Transaction
 }
+export default transactionModel

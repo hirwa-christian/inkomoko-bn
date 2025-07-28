@@ -1,8 +1,9 @@
-const express=require('express')
-const cors=require('cors')
-const dotenv=require('dotenv')
-dotenv.config()
+import dotenv from "dotenv"
+import express from "express"
+import cors from "cors"
+import router from "./routes/transactionRouter.js";
 
+dotenv.config()
 const app=express();
 
 //middleware
@@ -10,9 +11,6 @@ app.use(cors({ origin: "*" }))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-//routers
-
-const router=require('./routes/transactionRouter.js')
 app.use('/api/Trader',router)
 
 //testing api

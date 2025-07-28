@@ -1,16 +1,19 @@
-// const dbConfig=require('../config/dbconfig.js');
-// console.log(dbConfig)
-const {Sequelize,DataTypes}=require('sequelize')
+import dbconfig from '../config/dbconfig.js';
+import {Sequelize,DataTypes} from 'sequelize';
+import transactionModel from './transactionModel.js';
+import userModel from './userModel.js';
 
-const sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER,process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT, // Use the port from the config
-    dialect: process.env.DIALECT,
-    logging: false, // Optional: Disable logging for cleaner output
+console.log(dbconfig)
+
+const sequelize = new Sequelize(dbconfig.DB, dbconfig.USER, dbconfig.PASSWORD, {
+    host: dbconfig.HOST,
+    port: dbconfig.PORT, 
+    dialect: dbconfig.dialect,
+    logging: false, 
     pool: {
         max: 5, // Maximum number of connections
         min: 0, // Minimum number of connections
-        acquire: 60000, // Maximum time (ms) Sequelize will try to get a connection
+        acquire: 60000,
         idle: 10000, // Maximum time (ms) a connection can be idle before being released
     },
     retry: {
@@ -20,25 +23,26 @@ const sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER,process.
         connectTimeout: 60000, // Timeout for establishing a connection (in ms)
     },
 });
+
 sequelize.authenticate()
-.then(()=>{
-    console.log('connectesd')
-})
-.catch(err=>{
-    console.log('Error'+err)
-})
-const db={}
+    .then(() => {
+        console.log('Connected to the database!');
+    })
+    .catch(err => {
+        console.log('Error:', err);
+    });
 
-db.Sequelize=Sequelize
-db.sequelize=sequelize
+const db = {
+    Sequelize,
+    sequelize,
+    transactions:transactionModel(sequelize,DataTypes),
+    users:userModel(sequelize,DataTypes),
+};
 
-db.transactions=require('./transactionModel.js')(sequelize,DataTypes)
-db.users=require('./userModel.js')(sequelize,DataTypes)
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-db.sequelize.sync({force:false})
-.then(()=>{
-    console.log('yes re-syn done!')
-})
+await sequelize.sync({force:false});
+console.log('Database re-synced')
 
-
-module.exports=db
+export default db

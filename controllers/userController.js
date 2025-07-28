@@ -1,12 +1,12 @@
-const db=require('../models')
-const bcrypt=require('bcrypt')
-const jwt=require('jsonwebtoken')
-const Joi=require('joi');
-const { where } = require('sequelize');
-const { use } = require('../routes/transactionRouter');
+import db from "../models/index.js"
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import Joi from "joi";
+import { where } from "sequelize";
+import use from "../routes/transactionRouter.js"
 const saltRounds=10;
 const User=db.users
-
+ 
 //add user
 
 const addUser=async(req,res)=>{
@@ -75,7 +75,7 @@ const addUser=async(req,res)=>{
              
     
 
-module.exports={
+export default{
   addUser,
   Userlogin,
   logoutUser
